@@ -1,107 +1,137 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rahim Academy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahim Academy</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#111;
-color:#fff;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
+    <style>
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#111;
+            color:#fff;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
 
-.box{
-width:90%;
-max-width:400px;
-text-align:center;
-}
+        .box{
+            width:90%;
+            max-width:400px;
+            text-align:center;
+        }
 
-h1{
-margin-bottom:30px;
-}
+        /* تنسيق اللوجو */
+        .logo-container {
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            max-width: 160px; /* حجم اللوجو المظبوط */
+            height: auto;
+            border-radius: 50%; /* عشان يظهر بشكل دائري متناسق مع تصميم اللوجو */
+            box-shadow: 0 4px 10px rgba(255, 252, 0, 0.2); /* إضاءة خفيفة بلون اللوجو الأصفر */
+        }
 
-input{
-width:100%;
-padding:15px;
-font-size:18px;
-border:none;
-border-radius:10px;
-margin-bottom:15px;
-}
+        h1{
+            margin-bottom:30px;
+            font-size: 24px;
+        }
 
-button{
-width:100%;
-padding:15px;
-font-size:18px;
-border:none;
-border-radius:10px;
-background:#ffcc00;
-cursor:pointer;
-font-weight:bold;
-}
+        input{
+            width:100%;
+            padding:15px;
+            margin-bottom:15px;
+            border:none;
+            border-radius:10px;
+            outline:none;
+            font-size:16px;
+            box-sizing: border-box;
+        }
 
-#result{
-margin-top:20px;
-font-size:18px;
-}
-</style>
+        button{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:10px;
+            background:#ffcc00;
+            cursor:pointer;
+            font-weight:bold;
+            font-size:16px;
+            color: #000;
+        }
 
+        #result{
+            margin-top:20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #222; /* صندوق خلفية لعرض البيانات */
+            font-size:18px;
+            text-align: right; /* محاذاة النص لليمين عشان يقرأ عربي مظبوط */
+            display: none; /* مخفي في البداية وهيظهر لما تبحث */
+        }
+        #result h2 {
+            margin-top: 0;
+            color: #ffcc00;
+            text-align: center;
+        }
+        #result p {
+            margin: 8px 0;
+        }
+    </style>
 </head>
 <body>
 
-<div class="box">
+    <div class="box">
+        <div class="logo-container">
+            <img src="IMG-20260608-WA0026(1).jpg" alt="لوجو أكاديمية رحيم">
+        </div>
 
-<h1>Rahim Academy</h1>
-
-<input id="code" placeholder="اكتب كود الطفل">
-
-<button onclick="searchStudent()">
-بحث
-</button>
-
-<div id="result"></div>
-
-</div>
+        <h1>Rahim Academy</h1>
+        
+        <input id="code" placeholder="اكتب كود الطفل">
+        <button onclick="searchStudent()">بحث</button>
+        
+        <div id="result"></div>
+    </div>
 
 <script>
+    // قاعدة بيانات الطلاب (الأكواد) - تقدر تزود هنا براحتك بنفس الطريقة
+    const students={
+        "1001": {
+            name: "كارما رأفت",
+            sport: "كاراتيه"
+        },
+        "1002":{
+            name:"عمر خالد",
+            sport:"جمباز"
+        },
+        "1003":{
+            name:"أحمد محمد رحيم",
+            sport:"كرة قدم"
+        }
+    };
 
-const students={
-"1001":{
-name:"محمد أحمد",
-sport:"كاراتيه"
-},
+    function searchStudent(){
+        let code=document.getElementById("code").value.trim();
+        let resultDiv = document.getElementById("result");
+        
+        // إظهار صندوق النتيجة
+        resultDiv.style.display = "block";
 
-"1002":{
-name:"عمر خالد",
-sport:"جمباز"
-}
-};
-
-function searchStudent(){
-
-let code=document.getElementById("code").value;
-
-if(students[code]){
-
-document.getElementById("result").innerHTML=
-"<h2>"+students[code].name+"</h2><p>"+students[code].sport+"</p>";
-
-}else{
-
-document.getElementById("result").innerHTML=
-"❌ الكود غير موجود";
-
-}
-
-}
-
+        if(students[code]){
+            // عرض بيانات اللاعب بشكل منسق واحترافي داخل الصندوق
+            resultDiv.innerHTML= `
+                <h2>الملف الشخصي للاعب</h2>
+                <p><strong>الاسم:</strong> ${students[code].name}</p>
+                <p><strong>اللعبة:</strong> ${students[code].sport}</p>
+            `;
+        }else{
+            // عرض رسالة الخطأ لو الكود مش موجود
+            resultDiv.innerHTML= "<p style='text-align:center; color:#ff4444;'>❌ الكود غير موجود</p>";
+        }
+    }
 </script>
 
 </body>
