@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahim Academy</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#111;
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+width:90%;
+max-width:400px;
+text-align:center;
+}
+
+h1{
+margin-bottom:30px;
+}
+
+input{
+width:100%;
+padding:15px;
+font-size:18px;
+border:none;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+button{
+width:100%;
+padding:15px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ffcc00;
+cursor:pointer;
+font-weight:bold;
+}
+
+#result{
+margin-top:20px;
+font-size:18px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="box">
+
+<h1>Rahim Academy</h1>
+
+<input id="code" placeholder="اكتب كود الطفل">
+
+<button onclick="searchStudent()">
+بحث
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const students={
+"1001":{
+name:"محمد أحمد",
+sport:"كاراتيه"
+},
+
+"1002":{
+name:"عمر خالد",
+sport:"جمباز"
+}
+};
+
+function searchStudent(){
+
+let code=document.getElementById("code").value;
+
+if(students[code]){
+
+document.getElementById("result").innerHTML=
+"<h2>"+students[code].name+"</h2><p>"+students[code].sport+"</p>";
+
+}else{
+
+document.getElementById("result").innerHTML=
+"❌ الكود غير موجود";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
